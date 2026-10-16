@@ -5,4 +5,8 @@ M.dir = function()
     print(config.options.dir)
 end
 
+M.new = function()
+    require("datum.new").run()
+end
+
 return M
