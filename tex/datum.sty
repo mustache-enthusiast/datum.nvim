@@ -10,3 +10,8 @@
 \newif\ifdatum@study
 
 \newcommand{\study}{\datum@studytrue}
+
+\edef\datum@dir{\directlua{tex.sprint(-2, lfs.currentdir())}}
+
+\newcommand{\dref}[1]{\href{\datum@dir/#1.pdf}{#1}}
+
