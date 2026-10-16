@@ -2,6 +2,7 @@
 \ProvidesPackage{datum}[2026/10/16 v0.1 knowledge base macros]
 \RequirePackage{hyperref}
 \RequirePackage{cleveref}
+\RequirePackage{tcolorbox}
 
 \newcommand{\datum}[1]{\def\datum@id{#1}}
 
@@ -14,4 +15,6 @@
 \edef\datum@dir{\directlua{tex.sprint(-2, lfs.currentdir())}}
 
 \newcommand{\dref}[1]{\href{\datum@dir/#1.pdf}{#1}}
+
+\NewTColorBox{card}{O{plain} m}{colback=yellow!8, colframe=black}
 
