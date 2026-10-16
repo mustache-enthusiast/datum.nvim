@@ -1,5 +1,7 @@
 local M = {}
 
+
+
 M.run = function()
     vim.ui.input({prompt = "Slug: "}, function(input)
         if input == nil or input == "" then
@@ -12,7 +14,17 @@ M.run = function()
             vim.notify("Datum: file '" .. path .. "' already exists", vim.log.levels.ERROR)
             return
         end
-        print(path)
+        vim.fn.mkdir(dir, "p")
+        local lines = {
+            "\\documentclass{datum}",
+            "\\datum{" .. input .. "}",
+            "\\title{}",
+            "\\tags{}",
+            "\\begin{document}",
+            "",
+            "\\end{document}",
+        }
+        vim.fn.writefile(lines, path)
     end)
 end
 
