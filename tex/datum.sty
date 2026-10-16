@@ -1,0 +1,12 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{datum}[2026/10/16 v0.1 knowledge base macros]
+\RequirePackage{hyperref}
+\RequirePackage{cleveref}
+
+\newcommand{\datum}[1]{\def\datum@id{#1}}
+
+\newcommand{\tags}[1]{\def\datum@tags{#1}}
+
+\newif\ifdatum@study
+
+\newcommand{\study}{\datum@studytrue}

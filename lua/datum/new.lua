@@ -15,7 +15,8 @@ M.run = function()
         end
         vim.fn.mkdir(paths.notes_dir(), "p")
         local lines = {
-            "\\documentclass{datum}",
+            "\\documentclass{homeworkbase}",
+            "\\usepackage{datum}",
             "\\datum{" .. input .. "}",
             "\\title{}",
             "\\tags{}",
