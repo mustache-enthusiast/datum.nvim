@@ -7,14 +7,13 @@ M.run = function()
         if input == nil or input == "" then
             return
         end
-        local config = require("datum.config")
-        local dir = vim.fn.expand(config.options.dir)
-        local path = vim.fs.joinpath(dir, input .. ".tex")
+        local paths = require("datum.paths")
+        local path = paths.note_path(input)
         if vim.uv.fs_stat(path) then
             vim.notify("Datum: file '" .. path .. "' already exists", vim.log.levels.ERROR)
             return
         end
-        vim.fn.mkdir(dir, "p")
+        vim.fn.mkdir(paths.notes_dir(), "p")
         local lines = {
             "\\documentclass{datum}",
             "\\datum{" .. input .. "}",
