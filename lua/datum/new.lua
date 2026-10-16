@@ -25,6 +25,7 @@ M.run = function()
             "\\end{document}",
         }
         vim.fn.writefile(lines, path)
+        vim.cmd.edit(path)
     end)
 end
 

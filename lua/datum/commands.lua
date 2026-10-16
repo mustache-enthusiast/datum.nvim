@@ -9,4 +9,8 @@ M.new = function()
     require("datum.new").run()
 end
 
+M.edit = function()
+    require("datum.edit").run()
+end
+
 return M
