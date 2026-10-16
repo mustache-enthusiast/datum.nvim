@@ -1,7 +1,7 @@
 local M = {}
 
 M.defaults = {
-    dir = "~/datum",
+    dir = "~/code/sandbox/datum",
 }
 
 M.options = {}
