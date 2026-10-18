@@ -1,4 +1,6 @@
 local M = {}
+M.depth = 0
+M.max_depth = 1
 
 M.embed = function(target)
     local dot = target:find(".", 1, true)
@@ -7,6 +9,10 @@ M.embed = function(target)
         return
     end
     local slug = target:sub(1, dot-1)
+    if M.depth >= M.max_depth then
+        tex.sprint("\\dref{" .. slug .. "}")
+        return
+    end
     local card = target:sub(dot+1)
     local path = lfs.currentdir() .. "/" .. slug .. ".tex"
     local file = io.open(path, "r")

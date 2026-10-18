@@ -19,11 +19,15 @@
 % --- Embed state (set by datum-tex.lua around each embedded card) -----
 \newif\ifdatum@embedded
 \newcommand{\DatumEmbedBegin}[2]{%
+  \directlua{datum.depth = datum.depth + 1}%
   \datum@embeddedtrue
   \def\datum@from{#1}%
   \def\datum@fromtitle{#2}%
 }
-\newcommand{\DatumEmbedEnd}{\datum@embeddedfalse}
+\newcommand{\DatumEmbedEnd}{%
+  \directlua{datum.depth = datum.depth - 1}%
+  \datum@embeddedfalse
+}
 
 % Header shown at the top of an embedded card: source link, then a rule.
 \newcommand{\datum@embedheader}{%
