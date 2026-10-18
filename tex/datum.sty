@@ -1,24 +1,58 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{datum}[2026/10/16 v0.1 knowledge base macros]
+\ProvidesPackage{datum}[2026/10/17 v0.1 knowledge base macros]
 \RequirePackage{hyperref}
 \RequirePackage{cleveref}
 \RequirePackage{tcolorbox}
-%\directlua{datum = require("datum-tex")}
+\tcbuselibrary{skins,breakable}
 \directlua{datum = dofile(kpse.find_file("datum-tex.lua"))}
 
+% --- Note metadata ----------------------------------------------------
 \newcommand{\datum}[1]{\def\datum@id{#1}}
-
 \newcommand{\tags}[1]{\def\datum@tags{#1}}
-
 \newif\ifdatum@study
-
 \newcommand{\study}{\datum@studytrue}
 
+% --- Links ------------------------------------------------------------
 \edef\datum@dir{\directlua{tex.sprint(-2, lfs.currentdir())}}
-
 \newcommand{\dref}[1]{\href{\datum@dir/#1.pdf}{#1}}
 
-\NewTColorBox{card}{O{plain} m}{colback=yellow!8, colframe=black}
+% --- Embed state (set by datum-tex.lua around each embedded card) -----
+\newif\ifdatum@embedded
+\newcommand{\DatumEmbedBegin}[2]{%
+  \datum@embeddedtrue
+  \def\datum@from{#1}%
+  \def\datum@fromtitle{#2}%
+}
+\newcommand{\DatumEmbedEnd}{\datum@embeddedfalse}
+
+% Header shown at the top of an embedded card: source link, then a rule.
+\newcommand{\datum@embedheader}{%
+  {\small From \href{\datum@dir/\datum@from.pdf}{\datum@fromtitle}}\par
+  \smallskip{\color{black!30}\hrule}\smallskip
+}
+
+% --- Card types -------------------------------------------------------
+\tcbset{
+  datum/recall/.style={
+    blanker,
+    borderline west={2pt}{0pt}{black!60},
+    left=10pt,
+    top=2pt, bottom=2pt,
+  },
+  datum/concept/.style={
+    colback=black!8,
+    colframe=black!8,
+    boxrule=0pt,
+    arc=4pt,
+  },
+}
+
+% --- Cards ------------------------------------------------------------
+\NewTColorBox{card}{O{recall} m}{
+  enhanced,
+  breakable,
+  datum/#1,
+  code={\ifdatum@embedded\pgfkeysalso{before upper=\datum@embedheader}\fi},
+}
 
 \newcommand{\dembed}[1]{\directlua{datum.embed("\luaescapestring{#1}")}}
-

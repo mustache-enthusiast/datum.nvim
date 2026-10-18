@@ -16,7 +16,11 @@ M.embed = function(target)
     end
     local lines = {}
     local inside = false
+    local title = nil
     for line in file:lines() do
+        if not title then
+            title = line:match("\\title{(.*)}")
+        end
         if not inside and line:find("\\begin{card}", 1, true) and line:find("{" .. card .. "}", 1, true) then
             inside = true
         end
@@ -32,7 +36,9 @@ M.embed = function(target)
         tex.error("datum: card '" .. card .. "' in '" .. path .."' is not found")
         return
     end
+    tex.print("\\DatumEmbedBegin{" .. slug .. "}{" .. title .. "}")
     tex.print(lines)
+    tex.print("\\DatumEmbedEnd")
 end
 
 return M
