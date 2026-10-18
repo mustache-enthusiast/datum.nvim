@@ -13,4 +13,8 @@ M.edit = function()
     require("datum.edit").run()
 end
 
+M.card = function()
+    require("datum.card").run()
+end
+
 return M
