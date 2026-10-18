@@ -3,6 +3,7 @@ local M = {}
 M.generate = function()
     local id = "d:"
     local alphabet = "0123456789abcdefghijklmnopqrstuvwxyz"
+    math.randomseed(os.time() + vim.fn.getpid())
     for i = 1, 4 do
         local n = math.random(#alphabet)
         local char = alphabet:sub(n, n)

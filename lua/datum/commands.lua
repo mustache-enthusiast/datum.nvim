@@ -17,4 +17,11 @@ M.card = function()
     require("datum.card").run()
 end
 
+M.index = function()
+    local index = require("datum.index")
+    index.build()
+    print(vim.inspect(index.files))
+    print(vim.inspect(index.cards))
+end
+
 return M
