@@ -3,6 +3,8 @@
 \RequirePackage{hyperref}
 \RequirePackage{cleveref}
 \RequirePackage{tcolorbox}
+%\directlua{datum = require("datum-tex")}
+\directlua{datum = dofile(kpse.find_file("datum-tex.lua"))}
 
 \newcommand{\datum}[1]{\def\datum@id{#1}}
 
@@ -17,4 +19,6 @@
 \newcommand{\dref}[1]{\href{\datum@dir/#1.pdf}{#1}}
 
 \NewTColorBox{card}{O{plain} m}{colback=yellow!8, colframe=black}
+
+\newcommand{\dembed}[1]{\directlua{datum.embed("\luaescapestring{#1}")}}
 
