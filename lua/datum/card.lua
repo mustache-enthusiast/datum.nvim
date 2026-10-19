@@ -1,8 +1,9 @@
 local M = {}
+local issued = {}
 
 local function raw_id()
     local id = "d:"
---    local alphabet = "0123456789abcdefghijklmnopqrstuvwxyz"
+    --local alphabet = "0123456789abcdefghijklmnopqrstuvwxyz"
     local alphabet = "a"
     math.randomseed(os.time() + vim.fn.getpid())
     for i = 1, 4 do
@@ -29,7 +30,7 @@ M.generate = function ()
     end
     local id = raw_id()
     local tries = 1
-    while index.cards[id] do
+    while index.cards[id] or issued[id] do
         if tries >= 100 then
             vim.notify("Datum: could not generate a unique card id", vim.log.levels.ERROR)
             return nil
@@ -37,7 +38,12 @@ M.generate = function ()
         id = raw_id()
         tries = tries + 1
     end
+    issued[id] = true
     return id
+end
+
+M.issued_ids = function()
+    return vim.deepcopy(issued)
 end
 
 return M
