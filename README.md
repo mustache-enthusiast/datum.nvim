@@ -30,10 +30,10 @@ Some "recall" content goes here
 
 ## Installation
 
--The nvim plugin must be installed
--datum.sty must be accesible by your compiler (see below for more detail)
--.tex files must compile with LuaLaTeX (You can set this on a per-file basis with `%! TeX program = lualatex` before the document class declaration in the preamble if you don't want to set LuaLaTeX as your default compiler)
--All TeX files will need `\usepackage{datum}` in their preamble (as of v0.1, this is NOT automated even when adding new slugs using `:Datum new`)
+- The nvim plugin must be installed
+- datum.sty must be accesible by your compiler (see below for more detail)
+- .tex files must compile with LuaLaTeX (You can set this on a per-file basis with `%! TeX program = lualatex` before the document class declaration in the preamble if you don't want to set LuaLaTeX as your default compiler)
+- All TeX files will need `\usepackage{datum}` in their preamble (as of v0.1, this is NOT automated even when adding new slugs using `:Datum new`)
 
 
 ### lazy.nvim Installation
