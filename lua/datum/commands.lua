@@ -34,4 +34,8 @@ M.index_nobuild = function()
     print(vim.inspect(issued_ids))
 end
 
+M.embed = function()
+    require("datum.picker").embed()
+end
+
 return M
